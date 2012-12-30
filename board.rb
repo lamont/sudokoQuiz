@@ -50,6 +50,11 @@ class Board
     }
     return true
   end
+  
+  def one(r,c)
+    # give me one cell that matches a specific row and column
+    @board.select {|cell| (cell.row == r) && (cell.col == c) }.first
+  end
 
   def row(n)
     @board.select {|cell| cell.row == n}
@@ -103,9 +108,8 @@ class Board
     puts horizRule = '+-------+-------+-------+'
     1.upto(9) {|r|
       dispLine = '| ' 
-      thisRowCells = row(r).to_set
-      puts thisRowCells.&(col(1)).to_a.first.to_s
-#      dispLine <<  [1, 2, 3].each { |c| thisRowCells.to_s }
+      dispLine << one(r,1)
+#      dispLine <<  [1, 2, 3].each { |c| one(r,c).to_s }
 #      << ' | ' 
  #     << line[3,3].join(' ') 
   #    << ' | ' 
