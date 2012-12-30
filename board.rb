@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 
 require 'cell'
+require 'set'
 
 class Board
 
@@ -100,10 +101,18 @@ class Board
   def display
     ourBoard = @board
     puts horizRule = '+-------+-------+-------+'
-    ourBoard.each_with_index { |line, index| 
-      dispLine = '| ' << line[0,3].join(' ') << ' | ' << line[3,3].join(' ') << ' | ' << line[6,3].join(' ') << ' |'
+    1.upto(9) {|r|
+      dispLine = '| ' 
+      thisRowCells = row(r).to_set
+      puts thisRowCells.&(col(1)).to_a.first.to_s
+#      dispLine <<  [1, 2, 3].each { |c| thisRowCells.to_s }
+#      << ' | ' 
+ #     << line[3,3].join(' ') 
+  #    << ' | ' 
+   #   << line[6,3].join(' ') 
+    #  << ' |'
       puts dispLine.gsub('0','_')
-      puts horizRule if (index).modulo(3) == 2
+      puts horizRule if (r).modulo(3) == 2
     }
   end
 
