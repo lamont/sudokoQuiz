@@ -3,7 +3,7 @@
 require 'cell'
 
 class Board
-  
+
   # Loads the @board array from a string matching the example above.
   def load(str)
     tmpBoard = Array.new
@@ -34,10 +34,10 @@ class Board
       return false unless rows.length == 9
       grids = @board.select {|cell| cell.grid == i}
       return false unless grids.length == 9
-      }    
+    }    
     return true
   end
-  
+
   def solved?
     #the sum of each grid, row and column should be 45
     # or, more elegantly, each row, column and grid should include 1..9
@@ -53,15 +53,15 @@ class Board
   def row(n)
     @board.select {|cell| cell.row == n}
   end
-  
+
   def col(n)
     @board.select {|cell| cell.col == n}
   end
-  
+
   def grid(n)
     @board.select {|cell| cell.grid == n}
   end
-  
+
   def togo
     @board.select {|cell| cell.unsolved? }.length    
   end
@@ -69,11 +69,11 @@ class Board
   def setPossible(cell)
     # load an unsolved cell with the possible values
     cell.possibles = (1..9).to_a - @board.map { |somecell| 
-        somecell.value if (somecell.row == cell.row) or (somecell.col == cell.col) or (somecell.grid == cell.grid)
-      }
+      somecell.value if (somecell.row == cell.row) or (somecell.col == cell.col) or (somecell.grid == cell.grid)
+    }
     #possibles = (1..9).to_a - self.col(c) - self.row(r) - self.grid(gridNum(c,r))   
   end
-  
+
   def simplify!
     didAnything = false
     potentials = @board
@@ -91,10 +91,10 @@ class Board
             didAnything = true
           end
         end
-        }
-      
       }
-      didAnything
+
+    }
+    didAnything
   end
 
   def display

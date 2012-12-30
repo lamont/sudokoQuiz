@@ -42,18 +42,18 @@ me.load(unsolvedBoard)
 me.display
 
 
- #c = (gets "col 1-9: ").to_i
-  #r = (gets "row 1-9: ").to_i
+#c = (gets "col 1-9: ").to_i
+#r = (gets "row 1-9: ").to_i
 
-  p "cell is: " + self.get(c,r).to_s
-  #self.set(1,1,2)
-  #p "cell is: " + self.get(c,r).to_s
+p "cell is: " + self.get(c,r).to_s
+#self.set(1,1,2)
+#p "cell is: " + self.get(c,r).to_s
 
-  p "column: " + self.col(c).join(" ").to_s
-  p "row: " + self.row(r).join(" ").to_s
-  p "grid: " + self.grid(gridNum(c,r)).join(" ").to_s 
+p "column: " + self.col(c).join(" ").to_s
+p "row: " + self.row(r).join(" ").to_s
+p "grid: " + self.grid(gridNum(c,r)).join(" ").to_s 
 
-  p "board is " + (self.solved? ? "solved." : "NOT solved")
+p "board is " + (self.solved? ? "solved." : "NOT solved")
 
 
 puts me.togo.to_s << " cells left" until !me.simplify!
