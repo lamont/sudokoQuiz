@@ -34,7 +34,7 @@ class Cell
   end
 
   def to_s
-    @value == 0 ? "_" : @value
+    (@value == 0 ? "_" : @value).to_s
   end
 
 end

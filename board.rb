@@ -51,8 +51,8 @@ class Board
     return true
   end
   
-  def one(r,c)
-    # give me one cell that matches a specific row and column
+  def get(c,r)
+    # give me one cell that matches a specific column
     @board.select {|cell| (cell.row == r) && (cell.col == c) }.first
   end
 
@@ -74,7 +74,7 @@ class Board
 
   def setPossible(cell)
     # load an unsolved cell with the possible values
-    cell.possibles = (1..9).to_a - @board.map { |somecell| 
+    cell.possible = (1..9).to_a - @board.map { |somecell|
       somecell.value if (somecell.row == cell.row) or (somecell.col == cell.col) or (somecell.grid == cell.grid)
     }
     #possibles = (1..9).to_a - self.col(c) - self.row(r) - self.grid(gridNum(c,r))   
@@ -108,15 +108,11 @@ class Board
     puts horizRule = '+-------+-------+-------+'
     1.upto(9) {|r|
       dispLine = '| ' 
-      dispLine << one(r,1)
-#      dispLine <<  [1, 2, 3].each { |c| one(r,c).to_s }
-#      << ' | ' 
- #     << line[3,3].join(' ') 
-  #    << ' | ' 
-   #   << line[6,3].join(' ') 
-    #  << ' |'
+      dispLine <<  [1, 2, 3].map { |c| get(c,r).to_s }.join(' ') << ' | '
+      dispLine <<  [4, 5, 6].map { |c| get(c,r).to_s }.join(' ') << ' | '
+      dispLine <<  [7, 8, 9].map { |c| get(c,r).to_s }.join(' ') << ' | '
       puts dispLine.gsub('0','_')
-      puts horizRule if (r).modulo(3) == 2
+      puts horizRule if (r).modulo(3) == 0
     }
   end
 
