@@ -3,10 +3,10 @@
 
 class Cell
 
-  attr_accessor :value, :possible, :grid
+  attr_accessor :value, :possiblevalues, :grid
 
   def initialize(c,r,v)
-    @possible = Array.new
+    @possiblevalues = Array.new
     @locX = c
     @locY = r
     @value = v
@@ -35,6 +35,12 @@ class Cell
 
   def to_s
     (@value == 0 ? "_" : @value).to_s
+  end
+
+  def possible(board)
+    @possiblevalues = (1..9).to_a - board.map { |somecell|
+      somecell.value if (somecell.row == row) or (somecell.col == col) or (somecell.grid == grid)
+    }
   end
 
 end

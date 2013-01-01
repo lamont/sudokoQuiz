@@ -56,6 +56,10 @@ class Board
     @board.select {|cell| (cell.row == r) && (cell.col == c) }.first
   end
 
+  def getpossible(c, r)
+    get(c,r).possible(@board)
+  end
+
   def row(n)
     @board.select {|cell| cell.row == n}
   end
@@ -72,7 +76,7 @@ class Board
     @board.select {|cell| cell.unsolved? }.length    
   end
 
-  def setPossible(cell)
+  def setpossible(cell)
     # load an unsolved cell with the possible values
     cell.possible = (1..9).to_a - @board.map { |somecell|
       somecell.value if (somecell.row == cell.row) or (somecell.col == cell.col) or (somecell.grid == cell.grid)
@@ -89,10 +93,10 @@ class Board
       1.upto(9) {|r| 
         if self.get(c,r) == 0
           #cell is unsolved
-          if (self.getPossible(c,r).length == 1)
+          if self.getpossible(c,r).length == 1
             # only one value is possible here, might as well set it
-            #printf("%d,%d has %s\n", c, r, self.getPossible(c,r).to_s)
-            self.set(c,r, self.getPossible(c,r)[0])
+            printf("%d,%d has %s\n", c, r, self.getPossible(c,r).to_s)
+            self.set(c,r, self.getpossible(c,r)[0])
             printf("%d,%d is now %d\n", c, r, self.get(c,r))
             didAnything = true
           end
