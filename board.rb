@@ -2,6 +2,7 @@
 
 require 'cell'
 require 'set'
+require 'solver'
 
 class Board
 
@@ -15,7 +16,7 @@ class Board
       fail "Length was #{tmpBoard.last.length}" unless tmpBoard.last.length == 9
     end
 
-    @board = Array.new    
+    @board = Set.new
     tmpBoard.each_with_index { |row, r| 
       row.each_with_index {|col, c|
         #inc r, c, because I want to index from 1, not 0
@@ -76,34 +77,15 @@ class Board
     @board.select {|cell| cell.unsolved? }.length    
   end
 
-  def setpossible(cell)
-    # load an unsolved cell with the possible values
-    cell.possible = (1..9).to_a - @board.map { |somecell|
-      somecell.value if (somecell.row == cell.row) or (somecell.col == cell.col) or (somecell.grid == cell.grid)
-    }
-    #possibles = (1..9).to_a - self.col(c) - self.row(r) - self.grid(gridNum(c,r))   
-  end
-
   def simplify!
     didAnything = false
-    potentials = @board
-    # fill potentials with the original board, then go through every 0 to enumerate
-    # the possibilities for that cell.
-    1.upto(9) {|c|
-      1.upto(9) {|r| 
-        if self.get(c,r) == 0
-          #cell is unsolved
-          if self.getpossible(c,r).length == 1
-            # only one value is possible here, might as well set it
-            printf("%d,%d has %s\n", c, r, self.getPossible(c,r).to_s)
-            self.set(c,r, self.getpossible(c,r)[0])
-            printf("%d,%d is now %d\n", c, r, self.get(c,r))
-            didAnything = true
-          end
-        end
-      }
+    # look for cells with only one possible value due to uniqueness of grid, row and column.
+    solved_cells = @board.select { |cell| cell.possible(@board).size == 1 }
+    solved_cells.each { |cell|
 
+      didAnything = true
     }
+
     didAnything
   end
 
