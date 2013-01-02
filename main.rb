@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 
-solvedBoard = <<END
+Solved_Board = <<END
 +-------+-------+-------+
 | 9 6 3 | 1 7 4 | 2 5 8 |
 | 1 7 8 | 3 2 5 | 6 4 9 |
@@ -16,7 +16,7 @@ solvedBoard = <<END
 +-------+-------+-------+
 END
 
-unsolvedBoard = <<END
+Unsolved_Board = <<END
 +-------+-------+-------+
 | _ 6 _ | 1 _ 4 | _ 5 _ |
 | _ _ 8 | 3 _ 5 | 6 _ _ |
@@ -36,29 +36,14 @@ require 'board'
 
 me = Board.new
 
-#puts unsolvedBoard
-puts "\n\n"
-me.load(unsolvedBoard)
+me.load(Unsolved_Board)
 me.display
-
-
-#c = (gets "col 1-9: ").to_i
-#r = (gets "row 1-9: ").to_i
-
-#p "cell is: " + self.get(c,r).to_s
-#self.set(1,1,2)
-#p "cell is: " + self.get(c,r).to_s
-
-#p "column: " + self.col(c).join(" ").to_s
-#p "row: " + self.row(r).join(" ").to_s
-#p "grid: " + self.grid(gridNum(c,r)).join(" ").to_s
-
-p "board is " + (me.solved? ? "solved." : "NOT solved")
-
 
 puts me.togo.to_s << " cells left"
 while me.simplify! do
   puts me.togo.to_s << " cells left"
   me.display
+  p "board is " + (me.solved? ? "solved." : "NOT solved")
 end
 
+puts "cell 1,1 possible values are #{me.getpossible(1,1).join(' ')}"
