@@ -37,7 +37,6 @@ class Board
       grids = @board.select {|cell| cell.grid == i}
       return false unless grids.length == 9
     }    
-    return true
   end
 
   def solved?
@@ -49,7 +48,6 @@ class Board
       return false unless (goal - self.col(n)).empty?
       return false unless (goal - self.grid(n)).empty?
     }
-    return true
   end
   
   def get(c,r)
@@ -83,18 +81,15 @@ class Board
   end
 
   def simplify!
-    didAnything = false
     # look for cells with only one possible value due to uniqueness of grid, row and column.
-    possible_solved_cells = @board.select { |cell| cell.possible(@board).size == 1 && cell.unsolved? }
-    possible_solved_cells.each { |cell|
+    # then put that only possible value in as the solution for that cell
+    not @board.select { |cell| cell.possible(@board).size == 1 && cell.unsolved? }.each { |cell|
       cell.value = cell.possible(@board).first
-      didAnything = true
-    }
-    didAnything
+    }.empty?
+    # returns true if it solved anything, false if no changes were made
   end
 
   def display
-    ourBoard = @board
     puts horizRule = '+-------+-------+-------+'
     1.upto(9) {|r|
       dispLine = '| ' 

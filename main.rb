@@ -38,8 +38,8 @@ me = Board.new
 
 me.load(Unsolved_Board)
 me.display
+puts me.togo.to_s << " cells unsolved at start"
 
-puts me.togo.to_s << " cells left"
 while me.simplify! do
   puts me.togo.to_s << " cells left"
   me.display
