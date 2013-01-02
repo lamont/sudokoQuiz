@@ -83,7 +83,7 @@ class Board
   def simplify!
     # look for cells with only one possible value due to uniqueness of grid, row and column.
     # then put that only possible value in as the solution for that cell
-    not @board.select { |cell| cell.possible(@board).size == 1 && cell.unsolved? }.each { |cell|
+    not @board.select { |cell| cell.unsolved? && cell.possible(@board).length == 1 }.map { |cell|
       cell.value = cell.possible(@board).first
     }.empty?
     # returns true if it solved anything, false if no changes were made

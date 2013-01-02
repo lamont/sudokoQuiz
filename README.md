@@ -1,7 +1,7 @@
 sudokoQuiz
 ==========
 
-a sudoko puzzle solver in ruby
+a sudoko puzzle solver in ruby, main.rb runs the exercise, board.rb is the main class and it uses cell and solver
 
 Back in 2005 or so, I was learning ruby and attempted this quiz:
 
@@ -14,7 +14,9 @@ My "solution":
 * was hard to read
 * had a bunch of nested for loops.
 
-I've been doing a lot more ruby lately and wanted to revisit this and refactor it in a more object oriented style, with the idea that I could make the complicated expressions more readable and eliminate nested for loops.
+I've been doing a lot more ruby lately and wanted to revisit this when I found it in a backcup. I can
+refactor it in a more object oriented style, with the idea that I could make the complicated expressions
+more readable and eliminate nested for loops.
 
 It's not fast, it's just meant to be readable and extendable as a programming exercise.
 

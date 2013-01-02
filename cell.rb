@@ -3,10 +3,10 @@
 
 class Cell
 
-  attr_accessor :value, :possiblevalues, :grid
+  attr_accessor :value, :possible_values, :grid
 
   def initialize(c,r,v)
-    @possiblevalues = Array.new
+    @possible_values = Array.new
     @locX = c
     @locY = r
     @value = v
@@ -39,7 +39,7 @@ class Cell
 
   def possible(board)
     # values 1-9 are possible, minus the values of all the cells in our row, col or grid
-    @possiblevalues = (1..9).to_a - board.map { |somecell|
+    @possible_values = (1..9).to_a - board.map { |somecell|
       somecell.value if (somecell.row == row) or (somecell.col == col) or (somecell.grid == grid)
     }
   end
