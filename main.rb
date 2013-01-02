@@ -57,10 +57,8 @@ p "board is " + (me.solved? ? "solved." : "NOT solved")
 
 
 puts me.togo.to_s << " cells left"
-me.simplify!
-puts me.togo.to_s << " cells left"
+while me.simplify! do
+  puts me.togo.to_s << " cells left"
+  me.display
+end
 
-
-me.display
-#p me.setpossible(5,3)
-p me.getpossible(5,3)

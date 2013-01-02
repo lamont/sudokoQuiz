@@ -85,8 +85,8 @@ class Board
   def simplify!
     didAnything = false
     # look for cells with only one possible value due to uniqueness of grid, row and column.
-    solved_cells = @board.select { |cell| cell.possible(@board).size == 1 }
-    solved_cells.each { |cell|
+    possible_solved_cells = @board.select { |cell| cell.possible(@board).size == 1 && cell.unsolved? }
+    possible_solved_cells.each { |cell|
       cell.value = cell.possible(@board).first
       didAnything = true
     }

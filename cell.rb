@@ -38,6 +38,7 @@ class Cell
   end
 
   def possible(board)
+    # values 1-9 are possible, minus the values of all the cells in our row, col or grid
     @possiblevalues = (1..9).to_a - board.map { |somecell|
       somecell.value if (somecell.row == row) or (somecell.col == col) or (somecell.grid == grid)
     }
