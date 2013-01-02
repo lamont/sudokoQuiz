@@ -57,6 +57,11 @@ class Board
     @board.select {|cell| (cell.row == r) && (cell.col == c) }.first
   end
 
+  def set(c,r,v)
+    # just change the value of a given cell
+    get(c,r).value = v
+  end
+
   def getpossible(c, r)
     get(c,r).possible(@board)
   end
@@ -82,10 +87,9 @@ class Board
     # look for cells with only one possible value due to uniqueness of grid, row and column.
     solved_cells = @board.select { |cell| cell.possible(@board).size == 1 }
     solved_cells.each { |cell|
-
+      cell.value = cell.possible(@board).first
       didAnything = true
     }
-
     didAnything
   end
 
