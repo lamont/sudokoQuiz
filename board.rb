@@ -95,6 +95,14 @@ class Board
     #  new single-value solutions appear
     groups = @board.classify { |cell| cell.possible(@board).length }
     groups[2].each { |cell| puts "cell #{cell.col},#{cell.row} could be #{cell.possible(@board).join(' ')}" }
+    # I could group all the 2 possibility cells together, find if they have a row, column or grid in common,
+    #  then subtract their possibilities from all other unsolved cells in that set in hopes of finding a value
+    #  I might need to change cell.possible to keep state, rather than generating only from solved cells.
+    # groups[2].classify { |cell| cell.possible(@board) }
+    # sort 2 element cells into sets where they have identical possibilities and are in the same row, col or grid
+    p groups[2].divide { |a, b|
+      a.possible(@board) == b.possible(@board) && (a.row == b.row || a.col == b.col || a.grid == b.grid )
+    }
   end
 
   def display
