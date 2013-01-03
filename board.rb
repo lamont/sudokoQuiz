@@ -89,6 +89,14 @@ class Board
     # returns true if it solved anything, false if no changes were made
   end
 
+  def isolate_two!
+    # isolate_two should attempt to find 2 cells in a row/column/grid which have only two (identical)
+    #  possible values. Then remove those two from all other zones of influence to see if we have any
+    #  new single-value solutions appear
+    groups = @board.classify { |cell| cell.possible(@board).length }
+    groups[2].each { |cell| puts "cell #{cell.col},#{cell.row} could be #{cell.possible(@board).join(' ')}" }
+  end
+
   def display
     puts horizRule = '+-------+-------+-------+'
     1.upto(9) {|r|
@@ -97,8 +105,7 @@ class Board
       dispLine <<  [4, 5, 6].map { |c| get(c,r).to_s }.join(' ') << ' | '
       dispLine <<  [7, 8, 9].map { |c| get(c,r).to_s }.join(' ') << ' | '
       puts dispLine.gsub('0','_')
-      puts horizRule if (r).modulo(3) == 0
-    }
+      puts horizRule if (r).modulo(3) == 0    }
   end
 
 end

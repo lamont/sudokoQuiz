@@ -47,3 +47,5 @@ while me.simplify! do
 end
 
 puts "cell 1,1 possible values are #{me.getpossible(1,1).join(' ')}"
+
+me.isolate_two!
