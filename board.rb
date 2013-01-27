@@ -51,7 +51,7 @@ class Board
   end
   
   def get(c,r)
-    # give me one cell that matches a specific column
+    # give me one cell that matches a specific column and row
     @board.select {|cell| (cell.row == r) && (cell.col == c) }.first
   end
 
@@ -80,6 +80,15 @@ class Board
     @board.select {|cell| cell.unsolved? }.length    
   end
 
+  def in_common(a, b)
+    # returns the cells that are in common with a and b, like their common row, column and/or grid
+    @board.select { |cell|
+      ( a.row == cell.row ) && ( b.row == cell.row) ||
+      ( a.col == cell.col ) && ( b.col == cell.col) ||
+      ( a.grid == cell.grid ) && (b.grid == cell.grid )
+    }
+  end
+
   def simplify!
     # look for cells with only one possible value due to uniqueness of grid, row and column.
     # then put that only possible value in as the solution for that cell
@@ -101,7 +110,7 @@ class Board
     # groups[2].classify { |cell| cell.possible(@board) }
     # sort 2 element cells into sets where they have identical possibilities and are in the same row, col or grid
     p groups[2].divide { |a, b|
-      a.possible(@board) == b.possible(@board) && (a.row == b.row || a.col == b.col || a.grid == b.grid )
+      ( a.possible(@board) == b.possible(@board) ) && ( a.row == b.row || a.col == b.col || a.grid == b.grid )
     }
   end
 
